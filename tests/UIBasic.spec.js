@@ -6,6 +6,7 @@ test('First test',async ({browser})=>
     const password='input#password'
     const signInButton="//input[@id='signInBtn']"
     const errorInvalidPassword="//div[contains(text(),' username/password.')]"
+    
     const context = await browser.newContext();
     const page = await context.newPage();
     await page.goto("https://rahulshettyacademy.com/loginpagePractise/");
@@ -40,7 +41,7 @@ test('direct opening page',async ({page}) =>
 }
 )
 
-test.only("working with select dropdown and radio option", async({page})=>
+test("working with select dropdown and radio option", async({page})=>
 {
     await page.goto("https://rahulshettyacademy.com/loginpagePractise/")
     const username='input#username'
@@ -67,8 +68,21 @@ test.only("working with select dropdown and radio option", async({page})=>
     console.log("checkbox unchecked ",await page.locator(checkbox1).isChecked())
     expect(await page.locator(checkbox1).isChecked()).toBeFalsy()
 
+})
 
+test("Verify present attribute",async({page})=>{
+     //Assertions blinking test
+    // to check the attribute value
+    await page.goto("https://rahulshettyacademy.com/loginpagePractise/")
+    const documentlink=page.locator('[href*="techsmarthire.com"]')
+    await expect(documentlink).toHaveAttribute("class","blinkingText");
+})
 
-
-    
+test.only("Verify new tab",async({page})=>{
+     //Assertions blinking test
+    // to check the attribute value
+    await page.goto("https://rahulshettyacademy.com/loginpagePractise/")
+    const documentlink=page.locator('[href*="techsmarthire.com"]')
+    await page.locator(documentlink).click()
+    page.pause()
 })
