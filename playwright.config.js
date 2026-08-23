@@ -7,9 +7,9 @@ import { chromium, defineConfig, devices } from '@playwright/test';
 // default time out 30 sec
 const config = ({
   testDir: './tests',
-  timeout: 1000 * 1000,//global timeout
+  timeout: 15 * 1000,//global timeout
   expect: {
-    timeout: 15 * 1000 // only for assertion
+    timeout: 5 * 1000 // only for assertion
 
   },
   reporter: 'html',
