@@ -78,11 +78,18 @@ test("Verify present attribute",async({page})=>{
     await expect(documentlink).toHaveAttribute("class","blinkingText");
 })
 
-test.only("Verify new tab",async({page})=>{
-     //Assertions blinking test
-    // to check the attribute value
+test.only("Verify new handle",async({browser})=>{
+    const context=await browser.newContext();
+    const page= await context.newPage();
     await page.goto("https://rahulshettyacademy.com/loginpagePractise/")
-    const documentlink=page.locator('[href*="techsmarthire.com"]')
-    await page.locator(documentlink).click()
-    page.pause()
+    const documentlink=page.locator('[href*="documents"]')
+    // if new page is opening we have to give some wait for rvent
+    const [newPage]=await Promise.all(
+        [
+            context.waitForEvent('page'),
+            documentlink.click(),
+        ]
+    )
+    const test=await newPage.locator("p.red").textContent()
+    console.log(test)
 })
