@@ -15,7 +15,9 @@ const config = ({
   reporter: 'html',
   use: {
     browserName: 'chromium',
-    headless : false
+    headless : false,
+    actionTimeout: 3000,
+    navigationTimeout: 5000
   }
 });
 module.exports = config

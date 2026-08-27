@@ -90,6 +90,6 @@ test.only("Verify new handle",async({browser})=>{
             documentlink.click(),
         ]
     )
-    const test=await newPage.locator("p.red").textContent()
+    const test=await newPage.locator("p.red1").click({timeout:4000})
     console.log(test)
 })
