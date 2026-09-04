@@ -54,6 +54,23 @@ test.only("e2e testing for adding and checking out product the client app",async
 
     //clicking on checkout button
     await page.getByText("Checkout").click()
-    await page.pause()
+
+    await expect(page.locator(`label:has-text("${email}")`)).toBeVisible()
+
+    await page.getByPlaceholder("Select Country").pressSequentially("ind",{delay:150})
+
+    const dropdown=page.locator(".ta-results")
+    await dropdown.waitFor()
+    const countOption=await dropdown.locator("button").count();
+
+    for(let i=0;i<countOption;++i){
+        const text=await dropdown.locator("button").nth(i).textContent()
+        if (text.trim()==='India'){
+            await dropdown.locator("button").nth(i).click();
+            break;
+        }
+    }
+    await page.getByText("Place Order").click()
+    await expect(page.getByText(" Thankyou for the order.")).toBeVisible()
 
 })
