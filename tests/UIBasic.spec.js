@@ -74,7 +74,7 @@ test("Verify present attribute",async({page})=>{
      //Assertions blinking test
     // to check the attribute value
     await page.goto("https://rahulshettyacademy.com/loginpagePractise/")
-    const documentlink=page.locator('[href*="techsmarthire.com"]')
+    const documentlink=page.locator('[href*="documents-request"]')
     await expect(documentlink).toHaveAttribute("class","blinkingText");
 })
 
@@ -90,6 +90,15 @@ test.only("Verify new handle",async({browser})=>{
             documentlink.click(),
         ]
     )
-    const test=await newPage.locator("p.red1").click({timeout:4000})
+    const test=await newPage.locator(".red").textContent()
     console.log(test)
+    expect(test).toContain("Please email us at mentor@rahulshettyacademy.com")
+    const expected_mail="mentor@rahulshettyacademy.com"
+    const mail1=test.split("@")
+    const firstPart=mail1[0].split(" ")
+    const firstPartmail=firstPart[firstPart.length-1]
+    const domain=mail1[1].split(" ")[0]
+    const finalMail=firstPartmail+"@"+domain
+    console.log("mail=",finalMail)
+    expect(test).toContain(finalMail)
 })
