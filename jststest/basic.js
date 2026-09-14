@@ -55,3 +55,10 @@ for (let key in p){
     console.log(key)
     console.log(p[key])
 }
+//cgi
+console.log(a)
+var a=10
+//cgi
+console.log(b)
+let b=10
+
